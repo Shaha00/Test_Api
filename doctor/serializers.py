@@ -5,4 +5,4 @@ from .models import Review
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = 'id text author doctor'.split()
+        fields = 'id text author doctor created_date'.split()

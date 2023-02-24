@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -23,8 +23,8 @@ class Record(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя')
     surname = models.CharField(max_length=255, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=255, verbose_name='Отчество')
-    phone_number = models.IntegerField(validators=[MinValueValidator(100000000000), MaxValueValidator(9999999999999)],
-                                       verbose_name="Номер телефона")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 13 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=13, verbose_name="Ваш номер телефона")
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, verbose_name="Выбрать Врача")
     date = models.DateTimeField(verbose_name="Назначить Дату и Время Приема")
 
@@ -37,9 +37,10 @@ class Record(models.Model):
 
 
 class Review(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True)
-    text = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name="Автор")
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, verbose_name="Выберите доктора")
+    text = models.TextField(max_length=255, verbose_name="Tекст")
+    created_date = models.DateField(auto_now=True)
 
     class Meta:
         verbose_name = "Отзыв"
