@@ -11,4 +11,4 @@ class ReviewSerializer(serializers.ModelSerializer):
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        fields = 'id name patronymic datetime post education experience'.split()
+        fields = 'id image name patronymic datetime post education experience'.split()

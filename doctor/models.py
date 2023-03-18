@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Doctor(models.Model):
+    image = models.ImageField(default='photo_2023-03-18_20-43-19.jpg')
     name = models.CharField(max_length=255, verbose_name='Имя')
     patronymic = models.CharField(max_length=255, verbose_name='Отчество')
     datetime = models.DateField(verbose_name='Дата рождения')
