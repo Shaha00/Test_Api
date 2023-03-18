@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
-from .models import Review, Doctor
-from .serializers import ReviewSerializer, DoctorSerializer
+from .models import Review, Doctor, Record
+from .serializers import ReviewSerializer, DoctorSerializer, RecordSerializer
 # Create your views here.
 
 
@@ -16,5 +16,12 @@ class ReviewModelViewSet(ModelViewSet):
 class DoctorModelViewSet(ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    pagination_class = PageNumberPagination
+    lookup_field = 'id'
+
+
+class RecordModelViewSet(ModelViewSet):
+    queryset = Record.objects.all()
+    serializer_class = RecordSerializer
     pagination_class = PageNumberPagination
     lookup_field = 'id'
