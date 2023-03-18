@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
-
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 class Doctor(models.Model):
@@ -33,8 +33,7 @@ class Service(models.Model):
         return self.names
 
 class Record(models.Model):
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 13 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=13, verbose_name="Ваш номер телефона")
+    phone_number = PhoneNumberField(max_length=13, default='+996', verbose_name="Номер телефона")
     date = models.DateTimeField(verbose_name="Назначить Дату и Время Приема")
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name="Выбрать Услугу", null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, verbose_name="Выбрать Врача")
@@ -43,8 +42,7 @@ class Record(models.Model):
         verbose_name = "Запись на Прием"
         verbose_name_plural = "Запись на прием"
 
-    def __str__(self):
-        return self.phone_number
+    
 
    
 
