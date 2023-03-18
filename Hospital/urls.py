@@ -25,4 +25,10 @@ urlpatterns = [
     path('api/v1/reviews/<int:id>', views.ReviewModelViewSet.as_view({
         'get': 'retrieve', 'put': 'update', 'delete': 'destroy'
     })),
+    path('api/v1/doctors/', views.DoctorModelViewSet.as_view({
+        'get': 'list', 'post': 'create'
+    })),
+    path('api/v1/doctors/<int:id>', views.DoctorModelViewSet.as_view({
+        'get': 'retrieve', 'put': 'update', 'delete': 'destroy'
+    })),
 ]

@@ -1,8 +1,14 @@
 from rest_framework import serializers
-from .models import Review
+from .models import Review, Doctor
 
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = 'id text author doctor created_date'.split()
+
+
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = 'id name patronymic datetime post education experience'.split()
