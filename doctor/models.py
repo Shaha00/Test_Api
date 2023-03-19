@@ -48,7 +48,7 @@ class Record(models.Model):
 
 class Review(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name="Автор")
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, verbose_name="Выберите доктора")
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, verbose_name="Выберите доктора", related_name='doctor_reviews')
     text = models.TextField(max_length=255, verbose_name="Tекст")
     created_date = models.DateField(auto_now=True)
 
@@ -56,7 +56,7 @@ class Review(models.Model):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
 
-    def __str__(self):
-        return self.created_date
+    # def __str__(self):
+    #     return self.created_date
 
    

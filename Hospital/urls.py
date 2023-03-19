@@ -22,19 +22,15 @@ urlpatterns = [
     path('api/v1/reviews/', views.ReviewModelViewSet.as_view({
         'get': 'list', 'post': 'create'
     })),
-    path('api/v1/reviews/<int:id>', views.ReviewModelViewSet.as_view({
+    path('api/v1/reviews/<int:id>/', views.ReviewModelViewSet.as_view({
         'get': 'retrieve', 'put': 'update', 'delete': 'destroy'
     })),
-    path('api/v1/doctors/', views.DoctorModelViewSet.as_view({
-        'get': 'list', 'post': 'create'
-    })),
-    path('api/v1/doctors/<int:id>', views.DoctorModelViewSet.as_view({
-        'get': 'retrieve', 'put': 'update', 'delete': 'destroy'
-    })),
+    path('api/v1/doctors/', views.DoctorListCreateAPIView.as_view()),
+    path('api/v1/doctors/<int:id>/', views.DoctorDetailListCreateAPIView.as_view()),
     path('api/v1/records/', views.RecordModelViewSet.as_view({
         'get': 'list', 'post': 'create'
     })),
-    path('api/v1/records/<int:id>', views.RecordModelViewSet.as_view({
+    path('api/v1/records/<int:id>/', views.RecordModelViewSet.as_view({
         'get': 'retrieve', 'put': 'update', 'delete': 'destroy'
     })),
 ]
