@@ -36,11 +36,10 @@ class DoctorListCreateAPIView(ListCreateAPIView):
             return Response(data={"errors": serializer.errors},
                             status=status.HTTP_406_NOT_ACCEPTABLE)
         author = serializer.validated_data.get('author')
-        doctor = serializer.validated_data.get('doctor')
         text = serializer.validated_data.get('text')
         created_date = serializer.validated_data.get('created_date')
 
-        review = Review.objects.create(author=author, doctor=doctor, text=text, created_date=created_date)
+        review = Review.objects.create(author=author, text=text, created_date=created_date)
         return Response(data=DoctorDetailSerializer(review).data,
                         status=status.HTTP_201_CREATED)
 
