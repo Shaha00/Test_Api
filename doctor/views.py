@@ -6,6 +6,7 @@ from .models import Review, Doctor, Record
 from .serializers import ReviewSerializer, DoctorSerializer, RecordSerializer, DoctorValidateSerializer, DoctorDetailSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 
 # Create your views here.
 
@@ -27,6 +28,7 @@ class RecordModelViewSet(ModelViewSet):
 class DoctorListCreateAPIView(ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    permission_classes = (IsAdminUser)
 
     def create(self, request, *args, **kwargs):
         serializer = DoctorValidateSerializer
